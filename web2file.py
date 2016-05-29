@@ -17,7 +17,7 @@ import os
 import mechanize
 import subprocess as sp
 
-def getPDF(url):
+def getPage(url):
     
     browser = mechanize.Browser()
     browser.set_handle_robots(False)
@@ -39,14 +39,14 @@ def getPDF(url):
     f.write(reponse)
     print f
     f.close()
-    cmd = 'gnome-open reponse.html'
+    cmd = 'xdg-open reponse.html'
     sp.call(cmd.split())
     
     
 def main():
 
    url = raw_input('Url?\n')
-   getPDF(url)
+   getPage(url)
    
     
 if __name__ == '__main__':
