@@ -28,18 +28,18 @@ def getPage(url):
         url = 'https://'+url
 
     reponse = browser.open(url).read()
-    cmd = sp.Popen('find reponsefromweb4pdfscript.html', stdout=sp.PIPE)
+    cmd = sp.Popen('ls', stdout=sp.PIPE)
     result, error = cmd.communicate();
     
     if result.find('reponsefromweb4pdfscript.html'):
-        del_cmd = 'rm reponsefromweb4pdfscript.html';
+        del_cmd = 'rm reponsefromweb4pdfscript.html'
         sp.call(del_cmd.split())
     
-    f = open('reponsefromweb4pdfscript.html','r+')
+    f = open('reponsefromweb4pdfscript.html','a')
     f.write(reponse)
     print f
     f.close()
-    cmd = 'xdg-open reponse.html'
+    cmd = 'xdg-open reponsefromweb4pdfscript.html'
     sp.call(cmd.split())
     
     
