@@ -16,6 +16,7 @@
 import os
 import getpass
 import mechanize
+import subprocess as sp
 
 def getEDT(username, password, groupe, semaine):
 
@@ -33,8 +34,10 @@ def getEDT(username, password, groupe, semaine):
     browser.form['password'] = password
     response = browser.submit()
     pdf = browser.retrieve('https://cipcnet.insa-lyon.fr/scol/php/edt_pdf?id_groupe='+groupe+'&id_semaine_pc='+semaine)[0]
-    os.system( '/usr/bin/gnome-open ' + pdf)
-        
+    ## os.system( '/usr/bin/xdg-open ' + pdf) ## For gnome desktop /usr/bin/gnome-open works well
+    ## This is better:
+    cmd =' /usr/bin/xdg-open ' + pdf;
+    sp.call(cmd.split())
     
    # for line in browser.open('https://cipcnet.insa-lyon.fr/scol/php/edt_pdf?id_groupe='):
        
