@@ -13,10 +13,11 @@
  #  You should have received a copy of the GNU General Public License       
  #  along with this program.  If not, see <http://www.gnu.org/licenses/>.   
 
-import os
 import getpass
 import mechanize
 import subprocess as sp
+import time
+import datetime
 
 def getEDT(username, password, groupe, semaine):
 
@@ -37,7 +38,7 @@ def getEDT(username, password, groupe, semaine):
     ## os.system( '/usr/bin/xdg-open ' + pdf) ## For gnome desktop /usr/bin/gnome-open works well
     ## This is better:
     cmd =' /usr/bin/xdg-open ' + pdf;
-    sp.call(cmd.split())
+    fh = sp.call(cmd.split())
     
    # for line in browser.open('https://cipcnet.insa-lyon.fr/scol/php/edt_pdf?id_groupe='):
        
@@ -53,9 +54,11 @@ def getEDT(username, password, groupe, semaine):
 def main():
 
     groupe = raw_input('groupe?\n')
-    semaine = raw_input('semaine?\n')
     usr = raw_input('Username?\n')
     psw = getpass.getpass('Password?\n')
+    date_s = time.strftime('%Y/%m/%d')
+    y, m, d= [int(n) for n in date_s.split('/')]
+    semaine = str(datetime.date(y, m, d).isocalendar()[1]+10) ##On ajoute 10 car le cycle scolaire est decale de 10 semaine
     getEDT(usr, psw, groupe, semaine)
     
     
